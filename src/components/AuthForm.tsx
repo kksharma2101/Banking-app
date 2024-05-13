@@ -63,25 +63,32 @@ const AuthForm = ({ type }: { type: string }) => {
                     password: data.password
                 }
 
-                const newUser: any = await signUp(userData);
+                const newUser = await signUp(userData);
 
                 setUser(newUser);
             }
 
             if (type === 'sign-in') {
+                const { email, password } = await data;
                 const response = await signIn({
-                    email: data.email,
-                    password: data.password,
+                    email,
+                    password
                 })
 
-                if (response) router.push('/')
+                if (response) {
+                    router.push('/')
+                } else {
+                    console.log("error in sign-in")
+                }
+
             }
+
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
-        console.log(data)
+        // console.log(data)
         setIsLoading(false)
     }
 

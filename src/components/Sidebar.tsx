@@ -5,7 +5,10 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+<<<<<<< HEAD
 import Footer from './Footer'
+=======
+>>>>>>> 14220eb (add functionality in sidebar)
 
 const Sidebar = ({ user }: SiderbarProps) => {
     const pathName = usePathname();
@@ -24,7 +27,11 @@ const Sidebar = ({ user }: SiderbarProps) => {
                     const isActive = pathName === item.route || pathName.startsWith(`/${item.route}`);
 
                     return (
+<<<<<<< HEAD
                         <Link href={item.route} key={item.label} className={cn('sidebar-link', { "bg-bankGradient": isActive })} >
+=======
+                        <Link href={"/"} key={item.label} className={cn('sidebar-link', { "bg-bankGradient": isActive })} >
+>>>>>>> 14220eb (add functionality in sidebar)
                             <div className="relative size-6">
                                 <Image src={item.imgURL} alt={item.label} fill className={cn({
                                     'brightness-[3] invert-0': isActive
@@ -35,7 +42,10 @@ const Sidebar = ({ user }: SiderbarProps) => {
                     )
                 })}
             </nav>
+<<<<<<< HEAD
             <Footer user={user} type="desktop" />
+=======
+>>>>>>> 14220eb (add functionality in sidebar)
         </section>
     )
 }

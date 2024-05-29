@@ -18,6 +18,7 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
         labels: ['Bank1', 'Bank2', 'Bank3']
     }
     return (
+<<<<<<< HEAD
         <Doughnut data={data}
             options={{
                 cutout: "60%",
@@ -28,6 +29,9 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
                 }
             }}
         />
+=======
+        <Doughnut data={data} />
+>>>>>>> 21f27ef (add bank chart)
     )
 
 }

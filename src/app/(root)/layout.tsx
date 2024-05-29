@@ -15,6 +15,7 @@ export default async function RootLayout({
     if (!loggedIn) return redirect('/sign-in')
 
     return (
+<<<<<<< HEAD
         <main className="flex h-screen w-full font-inter">
 
             <Sidebar user={loggedIn} />
@@ -29,6 +30,10 @@ export default async function RootLayout({
                 {children}
             </div>
 
+=======
+        <main>
+            {children}
+>>>>>>> bfbc5cb (second commit start create functionality)
         </main>
     );
 }

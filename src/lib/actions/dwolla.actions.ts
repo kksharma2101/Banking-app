@@ -3,7 +3,7 @@
 import { Client } from "dwolla-v2";
 
 const getEnvironment = (): "production" | "sandbox" => {
-    const environment = process.env.DWOLLA_ENV as string;
+    const environment = process.env.DWOLLA_ENV;
 
     switch (environment) {
         case "sandbox":
@@ -24,9 +24,7 @@ const dwollaClient = new Client({
 });
 
 // Create a Dwolla Funding Source using a Plaid Processor Token
-export const createFundingSource = async (
-    options: CreateFundingSourceOptions
-) => {
+export const createFundingSource = async (options: CreateFundingSourceOptions) => {
     try {
         return await dwollaClient
             .post(`customers/${options.customerId}/funding-sources`, {
@@ -51,6 +49,7 @@ export const createOnDemandAuthorization = async () => {
     }
 };
 
+
 export const createDwollaCustomer = async (
     newCustomer: NewDwollaCustomerParams
 ) => {
@@ -58,6 +57,7 @@ export const createDwollaCustomer = async (
         return await dwollaClient
             .post("customers", newCustomer)
             .then((res) => res.headers.get("location"));
+
     } catch (err) {
         console.error("Creating a Dwolla Customer Failed: ", err);
     }

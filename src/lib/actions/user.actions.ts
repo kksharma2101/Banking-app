@@ -17,7 +17,6 @@ const {
 } = process.env;
 
 // sign-in user
-
 export const signIn = async ({ email, password }: signInProps) => {
     try {
         const { account } = await createAdminClient();
@@ -31,9 +30,8 @@ export const signIn = async ({ email, password }: signInProps) => {
 }
 
 // sign-up user
-
-export const signUp = async ({ password, ...userData }: SignUpParams) => {
-    const { email, firstName, lastName } = userData;
+export const signUp = async ({ ...userData }: SignUpParams) => {
+    const { email, firstName, lastName, address1, city, state, postalCode, dateOfBirth, password } = userData;
     let newUserAccount;
     try {
         const { account, database } = await createAdminClient();
@@ -83,7 +81,6 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 }
 
 // logged-in user
-
 export async function getLoggedInUser() {
     try {
         const { account } = await createSessionClient();
@@ -96,7 +93,6 @@ export async function getLoggedInUser() {
 }
 
 // logged-out user
-
 export const logoutAccount = async () => {
     try {
         const { account } = await createSessionClient();
@@ -122,12 +118,12 @@ export const createLinkToken = async (user: User) => {
             language: 'en',
             country_codes: ['US'] as CountryCode[],
         }
+
         const response = await plaidClient.linkTokenCreate(tokenParams);
 
-        return parseStringify({ linkToken: response.data.link_token });
-
+        return parseStringify({ linkToken: response.data.link_token })
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
@@ -158,19 +154,23 @@ export const createBankAccount = async ({ userId, bankId, accountId, accessToken
 }
 
 // exchange public token
-export const exchangePublicToken = async ({ user, publicToken }: exchangePublicTokenProps) => {
+export const exchangePublicToken = async ({
+    publicToken,
+    user,
+}: exchangePublicTokenProps) => {
     try {
         // Exchange public token for access token and item ID
         const response = await plaidClient.itemPublicTokenExchange({
-            public_token: publicToken
-        })
+            public_token: publicToken,
+        });
+
         const accessToken = response.data.access_token;
         const itemId = response.data.item_id;
 
-        // Get account information from plaid using the access token
+        // Get account information from Plaid using the access token
         const accountsResponse = await plaidClient.accountsGet({
-            access_token: accessToken
-        })
+            access_token: accessToken,
+        });
 
         const accountData = accountsResponse.data.accounts[0];
 
@@ -211,8 +211,7 @@ export const exchangePublicToken = async ({ user, publicToken }: exchangePublicT
         return parseStringify({
             publicTokenExchange: "complete",
         });
-
     } catch (error) {
-        console.log("An error occured while creating exchange token", error);
+        console.error("An error occurred while creating exchanging token:", error);
     }
 }

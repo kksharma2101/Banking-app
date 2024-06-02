@@ -3,9 +3,9 @@
 import { ID } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
-import { encryptId, extractCustomerIdFromUrl, parseStringify } from "../utils";
+import { encryptId, extractCustomerIdFromUrl, parseStringify } from "@/lib/utils";
 import { CountryCode, ProcessorTokenCreateRequest, ProcessorTokenCreateRequestProcessorEnum, Products } from "plaid";
-import { plaidClient } from "../plaid";
+import { plaidClient } from "@/lib/plaid";
 import { revalidatePath } from "next/cache";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.actions";
 
